@@ -13,12 +13,20 @@ import javax.swing.JTextField;
 
 public class View implements PropertyChangeListener{
     
+    
     private JFrame jframe;
     private JTextField count;
     
-    public View(Model model){
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        this.view((Model) evt.getSource());
+    }
+    
+    public JFrame getJFrame(){
+        return this.jframe;
+    }
 
-        model.setView(this);
+    public View(Model model){
 
         jframe = new JFrame("Counter");
         jframe.setSize(300, 300);
@@ -56,16 +64,8 @@ public class View implements PropertyChangeListener{
         });
     }
 
-   
-    
     public void view(Model model){
         count.setText(model.getCount()+"");
-    }
-
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        this.view((Model) evt.getSource());
     }
     
 }
