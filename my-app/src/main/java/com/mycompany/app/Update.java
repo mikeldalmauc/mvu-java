@@ -1,9 +1,14 @@
 package com.mycompany.app;
 
 public class Update{
-    
-    public static void update(Msg msg, Model model){
 
+    /**
+     * All changes on model should be performed by this function
+     * 
+     * @param msg
+     * @param model
+     */
+    public static void update(Msg msg, Model model){
 
         switch (msg) {
             case UP:

@@ -1,40 +1,48 @@
 package com.mycompany.app;
 
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.IOException;
-import java.nio.channels.Channel;
-
-import lombok.Builder;
-import lombok.Data;
-
 
 public class Model {
     
+    /*
+     * Support to add change listeners 
+     */
     private PropertyChangeSupport support;
 
+    public void setListener(PropertyChangeListener view) {
+        support.addPropertyChangeListener(view);
+    }
+
+    /**
+     *  Model data should go here
+     */
     private Integer count;
 
 
     public Model(){
         this.support = new PropertyChangeSupport(this);
+
+        /**
+         * Model initial data
+         */
         this.count = 0;
     }
 
-    // Getter y Setter para 'count'
+
     public Integer getCount() {
         return count;
     }
 
+    /*
+     * This can be improved and be made with a tag
+     */
     public void setCount(Integer count) {
         Integer old = this.count;
         this.count = count;
-        
+
         support.firePropertyChange("count", old, this.count);;
     }
 
-
-    public void setListener(View view) {
-        support.addPropertyChangeListener(view);
-    }
     
 }
